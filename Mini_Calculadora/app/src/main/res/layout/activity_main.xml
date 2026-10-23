@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/material_dynamic_neutral90"
+    android:layout_margin="16dp">
+
+
+    <TextView
+        android:id="@+id/tvOperacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:background="@android:color/transparent"
+        android:gravity="end|center_vertical"
+        android:hint="0"
+        android:maxLines="1"
+        android:ellipsize="start"
+        android:textColor="@android:color/black"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/btnSumar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="btnSumar"
+        android:src="@drawable/ic_sumar"
+        android:contentDescription="Sumar"
+        app:layout_constraintTop_toBottomOf="@id/tvOperacion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnRestar"
+        app:layout_constraintHorizontal_chainStyle="spread" />
+
+    <ImageButton
+        android:id="@+id/btnRestar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="btnRestar"
+        android:src="@drawable/ic_restar"
+        android:contentDescription="Restar"
+        app:layout_constraintTop_toBottomOf="@id/tvOperacion"
+        app:layout_constraintStart_toEndOf="@+id/btnSumar"
+        app:layout_constraintEnd_toStartOf="@+id/btnMultiplicar" />
+
+    <ImageButton
+        android:id="@+id/btnMultiplicar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="btnMultiplicar"
+        android:src="@drawable/ic_multiplicar"
+        android:contentDescription="Multiplicar"
+        app:layout_constraintTop_toBottomOf="@id/tvOperacion"
+        app:layout_constraintStart_toEndOf="@+id/btnRestar"
+        app:layout_constraintEnd_toStartOf="@+id/btnDiv" />
+
+    <ImageButton
+        android:id="@+id/btnDiv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
+        android:onClick="btnDividir"
+        android:src="@drawable/ic_dividir"
+        android:contentDescription="Dividir"
+        app:layout_constraintTop_toBottomOf="@id/tvOperacion"
+        app:layout_constraintStart_toEndOf="@+id/btnMultiplicar"
+        app:layout_constraintEnd_toStartOf="@+id/btnBorrar" />
+
+    <ImageButton
+        android:id="@+id/btnBorrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:onClick="btnBorrar"
+        android:src="@drawable/ic_borrar"
+        android:contentDescription="Borrar"
+        app:layout_constraintTop_toBottomOf="@id/tvOperacion"
+        app:layout_constraintStart_toEndOf="@+id/btnDiv"
+        app:layout_constraintEnd_toStartOf="@id/btnC" />
+
+    <Button
+        android:id="@+id/btnC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="C"
+        android:onClick="btnC"
+        android:contentDescription="Borrar TODO"
+        app:layout_constraintTop_toBottomOf="@id/tvOperacion"
+        app:layout_constraintStart_toEndOf="@+id/btnBorrar"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnNum1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="btnNum1"
+        android:text="1"
+        app:layout_constraintEnd_toStartOf="@+id/btnNum2"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnC" />
+
+    <Button
+        android:id="@+id/btnNum2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:text="2"
+        android:onClick="btnNum2"
+        app:layout_constraintTop_toBottomOf="@id/btnC"
+        app:layout_constraintStart_toEndOf="@+id/btnNum1"
+        app:layout_constraintEnd_toStartOf="@+id/btnNum3" />
+
+    <Button
+        android:id="@+id/btnNum3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="3"
+        android:onClick="btnNum3"
+        app:layout_constraintTop_toBottomOf="@id/btnC"
+        app:layout_constraintStart_toEndOf="@+id/btnNum2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnNum4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="4"
+        android:onClick="btnNum4"
+        app:layout_constraintTop_toBottomOf="@id/btnNum1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnNum5"
+        app:layout_constraintHorizontal_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/btnNum5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="5"
+        android:onClick="btnNum5"
+        app:layout_constraintTop_toBottomOf="@id/btnNum2"
+        app:layout_constraintStart_toEndOf="@+id/btnNum4"
+        app:layout_constraintEnd_toStartOf="@+id/btnNum6" />
+
+    <Button
+        android:id="@+id/btnNum6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="6"
+        android:onClick="btnNum6"
+        app:layout_constraintTop_toBottomOf="@id/btnNum3"
+        app:layout_constraintStart_toEndOf="@+id/btnNum5"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnNum7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="7"
+        android:onClick="btnNum7"
+        app:layout_constraintTop_toBottomOf="@id/btnNum4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnNum8"
+        app:layout_constraintHorizontal_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/btnNum8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="8"
+        android:onClick="btnNum8"
+        app:layout_constraintTop_toBottomOf="@id/btnNum5"
+        app:layout_constraintStart_toEndOf="@+id/btnNum7"
+        app:layout_constraintEnd_toStartOf="@+id/btnNum9" />
+
+    <Button
+        android:id="@+id/btnNum9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="9"
+        android:onClick="btnNum9"
+        app:layout_constraintTop_toBottomOf="@id/btnNum6"
+        app:layout_constraintStart_toEndOf="@+id/btnNum8"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/btnNum0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="0"
+        android:onClick="btnNum0"
+        app:layout_constraintTop_toBottomOf="@id/btnNum7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnComa"
+        app:layout_constraintHorizontal_chainStyle="spread" />
+
+    <Button
+        android:id="@+id/btnComa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text=","
+        android:onClick="btnComa"
+        app:layout_constraintTop_toBottomOf="@id/btnNum8"
+        app:layout_constraintStart_toEndOf="@+id/btnNum0"
+        app:layout_constraintEnd_toStartOf="@+id/btnIgual" />
+
+    <Button
+        android:id="@+id/btnIgual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="="
+        android:onClick="btnIgual"
+        app:layout_constraintTop_toBottomOf="@id/btnNum9"
+        app:layout_constraintStart_toEndOf="@+id/btnComa"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

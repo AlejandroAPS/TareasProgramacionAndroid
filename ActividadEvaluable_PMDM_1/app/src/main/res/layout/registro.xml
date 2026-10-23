@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/negro_fondo"
+    tools:context="RegistroActivity">
+
+    <!-- Barra superior -->
+        <View
+            android:id="@+id/vistaSuperior"
+            android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:background="@color/gris_boton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTituloRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTRO"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_italic_variablefont_wdth_wght"
+            app:layout_constraintBottom_toBottomOf="@+id/vistaSuperior"
+            app:layout_constraintEnd_toEndOf="@+id/vistaSuperior"
+            app:layout_constraintStart_toStartOf="@+id/vistaSuperior"
+            app:layout_constraintTop_toTopOf="@+id/vistaSuperior" />
+
+    <!-- Logo -->
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            app:srcCompat="@drawable/eskinazo_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vistaSuperior" />
+
+    <!-- Ingreso datos registro -->
+    <!-- Nombre -->
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="30dp"
+            android:autofillHints="givenName"
+            android:hint="Nombre"
+            android:inputType="textPersonName|textCapWords"
+            android:minHeight="48dp"
+            android:textColor="@color/gris_boton"
+            android:textColorHint="@color/gris_boton"
+            app:layout_constraintStart_toEndOf="@id/imageView1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imageView1"
+            app:layout_constraintBottom_toTopOf="@id/etApellidos"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <!-- Apellidos -->
+    <EditText
+        android:id="@+id/etApellidos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="familyName"
+        android:hint="Apellidos"
+        android:inputType="textPersonName|textCapWords"
+        android:minHeight="48dp"
+        android:textColor="@color/gris_boton"
+        android:textColorHint="@color/gris_boton"
+        app:layout_constraintStart_toEndOf="@id/imageView1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombre"
+        app:layout_constraintBottom_toBottomOf="@id/imageView1" />
+
+    <!-- email -->
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="emailAddress"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/gris_boton"
+        android:textColorHint="@color/gris_boton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView1" />
+
+    <!-- Contraseña -->
+    <EditText
+        android:id="@+id/etContra"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="newPassword"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="@color/gris_boton"
+        android:textColorHint="@color/gris_boton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+    <!-- Dirección -->
+    <EditText
+        android:id="@+id/etDireccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="postalAddress"
+        android:hint="Dirección"
+        android:inputType="textPostalAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/gris_boton"
+        android:textColorHint="@color/gris_boton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etContra"/>
+
+    <EditText
+        android:id="@+id/etCodigoPostal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="postalAddress"
+        android:hint="Código Postal"
+        android:inputType="textPostalAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/gris_boton"
+        android:textColorHint="@color/gris_boton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDireccion"/>
+
+
+    <Button
+        android:id="@+id/buttonCrearCuenta"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/gris_boton"
+        android:text="Crear Cuenta"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCodigoPostal"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
