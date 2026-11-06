@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ActividadEvaluable_PMDM_1</string>
+    <string name="usuario_descripcion">Perfil de usuario</string>
+    <string name="tapas">Tapas</string>
+    <string name="platos_combinados">Platos\nCombinados</string>
+    <string name="hamburgesas">Hamburguesas</string>
+    <string name="bebidas">Bebidas</string>
+    <string name="postres">Postres</string>
+    <string name="pedir">Pedir</string>
 </resources>

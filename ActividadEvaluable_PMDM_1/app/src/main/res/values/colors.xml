@@ -4,5 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="negro_fondo">#241E20</color>
     <color name="gris_boton">#6D6D6F</color>
-
+    <color name="gris_tarjeta">#2B2B2B</color>
 </resources>

@@ -136,6 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etContra"/>
 
+    <!-- Código Postal -->
     <EditText
         android:id="@+id/etCodigoPostal"
         android:layout_width="0dp"
@@ -167,5 +168,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etCodigoPostal"/>
+
+    <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/gris_boton"
+        android:text="Volver"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonCrearCuenta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
