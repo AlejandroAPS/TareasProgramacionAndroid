@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/negro_fondo"
-    tools:context=".Platos_CombinadosActivity">
+    tools:context=".PlatosCombinadosActivity">
 
     <include
         android:id="@+id/barraSuperior"

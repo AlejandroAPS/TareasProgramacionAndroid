@@ -10,6 +10,7 @@ import java.util.Locale
 
 class ArticuloAdapter(
     private val articulos: List<Articulo>,
+    private val onMas: (Articulo) -> Unit,
     private val onPedir: (Articulo) -> Unit
 ) : RecyclerView.Adapter<ArticuloAdapter.VH>() {
 
@@ -17,6 +18,7 @@ class ArticuloAdapter(
         val imagen: ImageView = vista.findViewById(R.id.ivArticulo)
         val nombre: TextView = vista.findViewById(R.id.tvNombre)
         val precio: TextView = vista.findViewById(R.id.tvPrecio)
+        val btnMas: Button = vista.findViewById(R.id.btnMas)
         val btnPedir: Button = vista.findViewById(R.id.btnPedir)
     }
 
@@ -30,6 +32,8 @@ class ArticuloAdapter(
         holder.imagen.setImageResource(a.imagen)
         holder.nombre.text = a.nombre
         holder.precio.text = String.format(Locale("es", "ES"), "%.2f €", a.precio)
+        holder.btnMas.setOnClickListener { onMas(a) }
         holder.btnPedir.setOnClickListener { onPedir(a) }
+        holder.itemView.setOnClickListener { onMas(a) } // pulsar la tarjeta también abre la ficha
     }
 }

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class HamburgesasActivity : AppCompatActivity() {
+class HamburguesasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tapas)
@@ -21,11 +21,15 @@ class HamburgesasActivity : AppCompatActivity() {
         )
 
         findViewById<RecyclerView>(R.id.rvArticulos).apply {
-            layoutManager = LinearLayoutManager(this@HamburgesasActivity)
-            adapter = ArticuloAdapter(tapas) { articulo ->
-                // Por ahora solo un aviso; luego irá a la ficha / formulario
-                Toast.makeText(context, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
-            }
+            layoutManager = LinearLayoutManager(this@HamburguesasActivity)
+            adapter = ArticuloAdapter(
+                tapas,
+                onMas = { articulo -> mostrarFicha(articulo) { /* TODO: formulario */ } },
+                onPedir = { articulo ->
+                    // TODO: abrir el formulario directamente con este artículo
+                    Toast.makeText(this@HamburguesasActivity, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 }

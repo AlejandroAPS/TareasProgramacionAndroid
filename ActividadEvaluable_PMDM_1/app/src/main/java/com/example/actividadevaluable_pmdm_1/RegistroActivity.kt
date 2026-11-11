@@ -1,10 +1,10 @@
 package com.example.actividadevaluable_pmdm_1
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class RegistroActivity : AppCompatActivity() {
@@ -15,7 +15,6 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var etContra: EditText
     private lateinit var etDireccion: EditText
     private lateinit var etCodigoPostal: EditText
-    private lateinit var btnCrearCuenta: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +26,20 @@ class RegistroActivity : AppCompatActivity() {
         etContra = findViewById(R.id.etContra)
         etDireccion = findViewById(R.id.etDireccion)
         etCodigoPostal = findViewById(R.id.etCodigoPostal)
-        btnCrearCuenta = findViewById(R.id.buttonCrearCuenta)
 
-        btnCrearCuenta.setOnClickListener {
+        findViewById<Button>(R.id.buttonCrearCuenta).setOnClickListener {
             if (validarCampos()) {
                 guardarUsuario()
-                Toast.makeText(this, "Cuenta creada correctamente", Toast.LENGTH_SHORT).show()
-                finish() // vuelve al login
+                // Vaciamos la pila: ni login ni registro quedan detrás
+                startActivity(
+                    Intent(this, TapasActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                )
             }
+        }
+
+        findViewById<Button>(R.id.buttonVolver).setOnClickListener {
+            finish() // vuelve al login, que está justo debajo en la pila
         }
     }
 
@@ -46,11 +51,9 @@ class RegistroActivity : AppCompatActivity() {
         val direccion = etDireccion.text.toString().trim()
         val cp = etCodigoPostal.text.toString().trim()
 
-        // Limpiamos errores previos
         listOf(etNombre, etApellidos, etEmail, etContra, etDireccion, etCodigoPostal)
             .forEach { it.error = null }
 
-        // Orden de arriba a abajo; mostramos el primer error y paramos
         if (nombre.isEmpty()) {
             etNombre.error = "Introduce tu nombre"
             etNombre.requestFocus()
@@ -81,14 +84,13 @@ class RegistroActivity : AppCompatActivity() {
             etDireccion.requestFocus()
             return false
         }
-        if (cp.length != 5) {
+        val cpNumero = cp.toIntOrNull()
+        if (cp.length != 5 || cpNumero == null) {
             etCodigoPostal.error = "El código postal debe tener 5 dígitos"
             etCodigoPostal.requestFocus()
             return false
         }
-        // Los códigos postales españoles van de 01000 a 52999
-        val cpNumero = cp.toIntOrNull()
-        if (cpNumero == null || cpNumero !in 1000..52999) {
+        if (cpNumero !in 1000..52999) {
             etCodigoPostal.error = "Código postal no válido (01000 - 52999)"
             etCodigoPostal.requestFocus()
             return false

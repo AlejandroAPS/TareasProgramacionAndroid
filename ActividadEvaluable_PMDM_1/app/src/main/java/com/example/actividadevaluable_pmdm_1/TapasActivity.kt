@@ -13,7 +13,8 @@ class TapasActivity : AppCompatActivity() {
         configurarBarras("TAPAS")
 
         val tapas = listOf(
-            Articulo("Tortilla de patatas", 3.50, R.drawable.tapa_tortilla),
+            Articulo("Tortilla de patatas", 3.50, R.drawable.tapa_tortilla,
+                "Pincho de tortilla de patatas con cebolla, ingredientes locales y un trozo de pan para acompañar", "Huevo"),
             Articulo("Croquetas de jamón", 4.00, R.drawable.tapa_croquetas),
             Articulo("Patatas bravas", 3.00, R.drawable.tapa_patatas_bravas),
             Articulo("Calamares", 4.50, R.drawable.tapa_calamares),
@@ -22,10 +23,14 @@ class TapasActivity : AppCompatActivity() {
 
         findViewById<RecyclerView>(R.id.rvArticulos).apply {
             layoutManager = LinearLayoutManager(this@TapasActivity)
-            adapter = ArticuloAdapter(tapas) { articulo ->
-                // Por ahora solo un aviso; luego irá a la ficha / formulario
-                Toast.makeText(context, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
-            }
+            adapter = ArticuloAdapter(
+                tapas,
+                onMas = { articulo -> mostrarFicha(articulo) { /* TODO: formulario */ } },
+                onPedir = { articulo ->
+                    // TODO: abrir el formulario directamente con este artículo
+                    Toast.makeText(this@TapasActivity, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 }

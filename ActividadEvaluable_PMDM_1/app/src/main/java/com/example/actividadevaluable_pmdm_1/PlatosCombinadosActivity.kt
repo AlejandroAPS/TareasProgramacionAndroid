@@ -22,10 +22,14 @@ class PlatosCombinadosActivity : AppCompatActivity() {
 
         findViewById<RecyclerView>(R.id.rvArticulos).apply {
             layoutManager = LinearLayoutManager(this@PlatosCombinadosActivity)
-            adapter = ArticuloAdapter(tapas) { articulo ->
-                // Por ahora solo un aviso; luego irá a la ficha / formulario
-                Toast.makeText(context, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
-            }
+            adapter = ArticuloAdapter(
+                tapas,
+                onMas = { articulo -> mostrarFicha(articulo) { /* TODO: formulario */ } },
+                onPedir = { articulo ->
+                    // TODO: abrir el formulario directamente con este artículo
+                    Toast.makeText(this@PlatosCombinadosActivity, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
     }
 }

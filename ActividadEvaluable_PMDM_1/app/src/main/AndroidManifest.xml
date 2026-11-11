@@ -48,9 +48,14 @@
         </activity>
 
         <activity
-            android:name=".HamburgesasActivity"
+            android:name=".HamburguesasActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize">
         </activity>
+
+        <activity
+            android:name=".UsuarioActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 </manifest>

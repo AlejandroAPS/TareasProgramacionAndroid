@@ -45,13 +45,13 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
-        android:id="@+id/etNombre"
+        android:id="@+id/etEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/gris_boton"
+        android:textColor="@color/white"
         android:textColorHint="@color/gris_boton"
-        android:hint="Escribe tu nombre aquí"
-        android:inputType="text"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
@@ -64,7 +64,7 @@
         android:id="@+id/etContra"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/gris_boton"
+        android:textColor="@color/white"
         android:textColorHint="@color/gris_boton"
         android:hint="Escriba la contraseña"
         android:inputType="textPassword"
@@ -73,7 +73,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombre"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button

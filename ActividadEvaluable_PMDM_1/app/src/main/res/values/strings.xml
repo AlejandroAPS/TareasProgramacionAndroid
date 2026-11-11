@@ -7,4 +7,6 @@
     <string name="bebidas">Bebidas</string>
     <string name="postres">Postres</string>
     <string name="pedir">Pedir</string>
+    <string name="hacer_pedido">Hacer pedido</string>
+    <string name="mas">...</string>"
 </resources>
