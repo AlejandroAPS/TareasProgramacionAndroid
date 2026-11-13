@@ -14,22 +14,28 @@ class TapasActivity : AppCompatActivity() {
 
         val tapas = listOf(
             Articulo("Tortilla de patatas", 3.50, R.drawable.tapa_tortilla,
-                "Pincho de tortilla de patatas con cebolla, ingredientes locales y un trozo de pan para acompañar", "Huevo"),
-            Articulo("Croquetas de jamón", 4.00, R.drawable.tapa_croquetas),
-            Articulo("Patatas bravas", 3.00, R.drawable.tapa_patatas_bravas),
-            Articulo("Calamares", 4.50, R.drawable.tapa_calamares),
-            Articulo("Ensaladilla rusa", 3.50, R.drawable.tapa_ensaladilla)
+                "Clásica tortilla española de patatas con cebolla, jugosa y recién hecha.",
+                "Huevos"),
+            Articulo("Croquetas de jamón", 4.00, R.drawable.tapa_croquetas,
+                "Croquetas caseras cremosas rellenas de trocitos de jamón serrano.",
+                "Gluten, Lácteos, Huevos"),
+            Articulo("Patatas bravas", 3.00, R.drawable.tapa_patatas_bravas,
+                "Patatas bravas típicas bañadas en salsa brava picante y/o salsa alioli(solicite al camarero de turno).",
+                "Huevos, Gluten"),
+            Articulo("Calamares", 4.50, R.drawable.tapa_calamares,
+                "Calamares frescos rebozados y fritos, servidos con gajo de limón.",
+                "Pescado, Gluten, Moluscos"),
+            Articulo("Ensaladilla rusa", 3.50, R.drawable.tapa_ensaladilla,
+                "Ensalada fría tradicional de patata, zanahoria, guisantes, atún y mayonesa.",
+                "Huevos, Pescado")
         )
 
         findViewById<RecyclerView>(R.id.rvArticulos).apply {
             layoutManager = LinearLayoutManager(this@TapasActivity)
             adapter = ArticuloAdapter(
                 tapas,
-                onMas = { articulo -> mostrarFicha(articulo) { /* TODO: formulario */ } },
-                onPedir = { articulo ->
-                    // TODO: abrir el formulario directamente con este artículo
-                    Toast.makeText(this@TapasActivity, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
-                }
+                onMas = { articulo -> mostrarFicha(articulo) { abrirFormulario(it) } },
+                onPedir = { articulo -> abrirFormulario(articulo) }
             )
         }
     }

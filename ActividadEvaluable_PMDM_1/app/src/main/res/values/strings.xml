@@ -7,6 +7,25 @@
     <string name="bebidas">Bebidas</string>
     <string name="postres">Postres</string>
     <string name="pedir">Pedir</string>
-    <string name="hacer_pedido">Hacer pedido</string>
-    <string name="mas">...</string>"
+    <string name="hacer_pedido">Pedir</string>
+    <string name="mas">...</string>
+    <string name="Pedido">Resumen Pedido</string>
+    <string name="entrega_casa">A mi casa</string>
+    <string name="entrega_otra">Otra dirección</string>
+    <string name="pago_efectivo">Efectivo</string>
+    <string name="pago_tarjeta">Tarjeta</string>
+    <string name="titulo_cantidad">Cantidad</string>
+    <string name="titulo_entrega">¿Dónde lo enviamos?</string>
+    <string name="titulo_pago">Método de pago</string>
+    <string name="titulo_otra_direccion">Datos de entrega</string>
+    <string name="titulo_tarjeta">Datos de la tarjeta</string>
+    <string name="hint_cantidad">Cantidad (1-20)</string>
+    <string name="hint_notas">Notas o alergias (opcional)</string>
+    <string name="hint_nombre_destinatario">A nombre de</string>
+    <string name="hint_titular">Nombre del titular</string>
+    <string name="hint_num_tarjeta">Número de tarjeta (16 dígitos)</string>
+    <string name="hint_caducidad">MM/AA</string>
+    <string name="hint_cvc">CVC</string>
+    <string name="acepto_condiciones">Acepto las condiciones del pedido</string>
+    <string name="confirmar_pedido">Confirmar pedido</string>
 </resources>

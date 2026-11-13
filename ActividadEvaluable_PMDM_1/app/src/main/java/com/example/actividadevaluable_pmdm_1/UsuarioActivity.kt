@@ -28,14 +28,13 @@ class UsuarioActivity : AppCompatActivity() {
             "Código Postal: ${dato(UsuarioPrefs.KEY_CODIGO_POSTAL)}"
 
         findViewById<Button>(R.id.buttonCerrarSesion).setOnClickListener {
-            // Vaciamos la pila para que "atrás" no devuelva a la app.
+            // Vaciamos la pila para que "Volver" no devuelva a la app.
             // No tocamos las SharedPreferences: la cuenta sigue existiendo.
             startActivity(
                 Intent(this, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             )
         }
-
         findViewById<Button>(R.id.buttonVolver).setOnClickListener {
             finish()
         }

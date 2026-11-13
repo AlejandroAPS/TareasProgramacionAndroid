@@ -13,9 +13,7 @@ object UsuarioPrefs {
     const val KEY_DIRECCION = "direccion"
     const val KEY_CODIGO_POSTAL = "codigo_postal"
 
-    fun get(context: Context): SharedPreferences =
-        context.getSharedPreferences(NOMBRE_ARCHIVO, Context.MODE_PRIVATE)
+    fun get(context: Context): SharedPreferences = context.getSharedPreferences(NOMBRE_ARCHIVO, Context.MODE_PRIVATE)
 
-    fun hayUsuarioRegistrado(context: Context): Boolean =
-        get(context).contains(KEY_EMAIL)
+    fun hayUsuarioRegistrado(context: Context): Boolean = get(context).contains(KEY_EMAIL)
 }

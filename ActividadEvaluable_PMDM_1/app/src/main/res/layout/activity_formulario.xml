@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/negro_fondo"
+    tools:context=".FormularioActivity">
+
+    <include
+        android:id="@+id/barraSuperior"
+        layout="@layout/barra_superior"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/barraSuperior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true"
+            android:padding="16dp">
+
+            <!-- Tarjeta del artículo (reutilizada) -->
+            <include layout="@layout/item_tarjeta" />
+
+            <!-- Cantidad -->
+            <TextView
+                style="@style/TituloSeccion"
+                android:text="@string/titulo_cantidad" />
+
+            <EditText
+                android:id="@+id/etCantidad"
+                style="@style/CampoFormulario"
+                android:hint="@string/hint_cantidad"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="2"
+                android:text="1" />
+
+            <!-- Entrega -->
+            <TextView
+                style="@style/TituloSeccion"
+                android:text="@string/titulo_entrega" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/grupoEntrega"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:checkedButton="@+id/btnCasa"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/btnCasa"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="56dp"
+                    android:text="@string/entrega_casa"
+                    android:textColor="@color/selector_opcion_texto"
+                    app:backgroundTint="@color/selector_opcion_fondo"
+                    app:strokeColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnOtraDireccion"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="56dp"
+                    android:text="@string/entrega_otra"
+                    android:textColor="@color/selector_opcion_texto"
+                    app:backgroundTint="@color/selector_opcion_fondo"
+                    app:strokeColor="@color/white" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <TextView
+                android:id="@+id/tvDireccionGuardada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:text="Se enviará a:\nCalle Mayor 5, 28901" />
+
+            <LinearLayout
+                android:id="@+id/seccionOtraDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/TituloSeccion"
+                    android:layout_marginTop="12dp"
+                    android:textSize="16sp"
+                    android:text="@string/titulo_otra_direccion" />
+
+                <EditText
+                    android:id="@+id/etNombreDest"
+                    style="@style/CampoFormulario"
+                    android:hint="@string/hint_nombre_destinatario"
+                    android:inputType="textPersonName|textCapWords" />
+
+                <EditText
+                    android:id="@+id/etDireccionDest"
+                    style="@style/CampoFormulario"
+                    android:hint="Dirección"
+                    android:inputType="textPostalAddress" />
+
+                <EditText
+                    android:id="@+id/etCpDest"
+                    style="@style/CampoFormulario"
+                    android:hint="Código Postal"
+                    android:inputType="number"
+                    android:maxLength="5" />
+            </LinearLayout>
+
+            <!-- Pago -->
+            <TextView
+                style="@style/TituloSeccion"
+                android:text="@string/titulo_pago" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/grupoPago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:checkedButton="@+id/btnEfectivo"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/btnEfectivo"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="56dp"
+                    android:text="@string/pago_efectivo"
+                    android:textColor="@color/selector_opcion_texto"
+                    app:backgroundTint="@color/selector_opcion_fondo"
+                    app:strokeColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnTarjeta"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:minHeight="56dp"
+                    android:text="@string/pago_tarjeta"
+                    android:textColor="@color/selector_opcion_texto"
+                    app:backgroundTint="@color/selector_opcion_fondo"
+                    app:strokeColor="@color/white" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <LinearLayout
+                android:id="@+id/seccionTarjeta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/TituloSeccion"
+                    android:layout_marginTop="12dp"
+                    android:textSize="16sp"
+                    android:text="@string/titulo_tarjeta" />
+
+                <EditText
+                    android:id="@+id/etTitular"
+                    style="@style/CampoFormulario"
+                    android:hint="@string/hint_titular"
+                    android:inputType="textPersonName|textCapWords" />
+
+                <EditText
+                    android:id="@+id/etNumTarjeta"
+                    style="@style/CampoFormulario"
+                    android:hint="@string/hint_num_tarjeta"
+                    android:inputType="number"
+                    android:maxLength="16" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etCaducidad"
+                        style="@style/CampoFormulario"
+                        android:layout_width="0dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_caducidad"
+                        android:inputType="phone"
+                        android:maxLength="5" />
+
+                    <EditText
+                        android:id="@+id/etCvc"
+                        style="@style/CampoFormulario"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:hint="@string/hint_cvc"
+                        android:inputType="numberPassword"
+                        android:maxLength="3" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Notas y condiciones -->
+            <EditText
+                android:id="@+id/etNotas"
+                style="@style/CampoFormulario"
+                android:layout_marginTop="24dp"
+                android:hint="@string/hint_notas"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="2" />
+
+            <CheckBox
+                android:id="@+id/cbCondiciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="48dp"
+                android:text="@string/acepto_condiciones"
+                android:textColor="@color/white"
+                android:buttonTint="@color/white" />
+
+            <Button
+                android:id="@+id/btnConfirmar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="@color/gris_boton"
+                android:text="@string/confirmar_pedido"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

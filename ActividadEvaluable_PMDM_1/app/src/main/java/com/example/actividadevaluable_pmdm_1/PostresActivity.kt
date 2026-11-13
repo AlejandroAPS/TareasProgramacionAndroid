@@ -13,23 +13,29 @@ class PostresActivity : AppCompatActivity() {
         configurarBarras("POSTRES")
 
         val tapas = listOf(
-            Articulo("Brownie con helado", 3.50, R.drawable.brownie_helado
-                    ),
-            Articulo("Arroz con leche", 2.00, R.drawable.arroz__leche),
-            Articulo("Flan", 2.00, R.drawable.flan),
-            Articulo("Natillas", 2.50, R.drawable.natillas),
-            Articulo("Tarta de queso", 5.00, R.drawable.tarta_queso)
+            Articulo("Brownie con helado", 3.50, R.drawable.brownie_helado,
+                "Bizcocho de chocolate templado con nueces acompañado de bola de helado de vainilla.",
+                "Gluten, Lácteos, Huevos, Frutos Secos"),
+            Articulo("Arroz con leche", 2.00, R.drawable.arroz__leche,
+                "Postre casero tradicional cremoso de arroz con leche y canela en polvo.",
+                "Lácteos"),
+            Articulo("Flan", 2.00, R.drawable.flan,
+                "Flan de huevo casero con caramelo líquido.",
+                "Huevos, Lácteos"),
+            Articulo("Natillas", 2.50, R.drawable.natillas,
+                "Crema dulce tradicional de vainilla con galleta María.",
+                "Lácteos, Huevos, Gluten"),
+            Articulo("Tarta de queso", 5.00, R.drawable.tarta_queso,
+                "Porción de tarta de queso cremosa al horno con mermelada de arándanos.",
+                "Lácteos, Huevos, Gluten")
         )
 
         findViewById<RecyclerView>(R.id.rvArticulos).apply {
             layoutManager = LinearLayoutManager(this@PostresActivity)
             adapter = ArticuloAdapter(
                 tapas,
-                onMas = { articulo -> mostrarFicha(articulo) { /* TODO: formulario */ } },
-                onPedir = { articulo ->
-                    // TODO: abrir el formulario directamente con este artículo
-                    Toast.makeText(this@PostresActivity, "Pedido: ${articulo.nombre}", Toast.LENGTH_SHORT).show()
-                }
+                onMas = { articulo -> mostrarFicha(articulo) { abrirFormulario(it) } },
+                onPedir = { articulo -> abrirFormulario(articulo) }
             )
         }
     }
