@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Sección de AUDIO.
+    Reproducción local (res/raw/pista.wav) y streaming online con MediaPlayer.
+    Controles: Play Local, Play Online, Pause y Stop.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/audioRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app_gradient"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".AudioActivity">
+
+    <!-- Barra superior con navegación hacia atrás -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarAudio"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/surface"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/text_primary"
+        app:title="@string/audio_title"
+        app:titleCentered="true"
+        app:titleTextColor="@color/text_primary" />
+
+    <!-- Separador fino bajo la barra -->
+    <View
+        android:id="@+id/dividerAudio"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarAudio" />
+
+    <ScrollView
+        android:id="@+id/scrollAudio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerAudio">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Tarjeta de presentación de la sección -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/heroAudio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_hero_audio"
+                android:elevation="2dp"
+                android:padding="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iconHeroAudio"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_circle_translucent"
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_music"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/titleHeroAudio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/audio_hero_title"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconHeroAudio"
+                    app:layout_constraintTop_toTopOf="@id/iconHeroAudio" />
+
+                <TextView
+                    android:id="@+id/descHeroAudio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="8dp"
+                    android:lineSpacingExtra="1dp"
+                    android:text="@string/audio_hero_desc"
+                    android:textColor="#F2FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconHeroAudio"
+                    app:layout_constraintTop_toBottomOf="@id/titleHeroAudio" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Campo para la URL del stream -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUrl"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/url_hint"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:endIconMode="clear_text"
+                app:helperText="@string/url_helper"
+                app:helperTextEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/heroAudio"
+                app:startIconDrawable="@drawable/ic_cloud"
+                app:startIconTint="@color/primary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionGo"
+                    android:inputType="textUri"
+                    android:maxLines="1"
+                    android:text="@string/url_ejemplo"
+                    android:textSize="13sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Fila 1: Play Local / Play Online -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlayLocal"
+                style="@style/Widget.App.Button"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/btn_play_local"
+                app:backgroundTint="@color/accent_coral"
+                app:icon="@drawable/ic_play"
+                app:layout_constraintEnd_toStartOf="@id/btnPlayOnline"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilUrl" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPlayOnline"
+                style="@style/Widget.App.Button"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/btn_play_online"
+                app:backgroundTint="@color/primary"
+                app:icon="@drawable/ic_cloud"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnPlayLocal"
+                app:layout_constraintTop_toBottomOf="@id/tilUrl" />
+
+            <!-- Fila 2: Pause / Stop -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPause"
+                style="@style/Widget.App.Button.Tonal"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/btn_pause"
+                app:icon="@drawable/ic_pause"
+                app:layout_constraintEnd_toStartOf="@id/btnStop"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPlayLocal" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStop"
+                style="@style/Widget.App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btn_stop"
+                android:textColor="@color/accent_coral"
+                app:icon="@drawable/ic_stop"
+                app:iconTint="@color/accent_coral"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnPause"
+                app:layout_constraintTop_toBottomOf="@id/btnPlayOnline"
+                app:strokeColor="@color/audio_soft" />
+
+            <!-- Barra de progreso para hacer seek -->
+            <SeekBar
+                android:id="@+id/seekBarAudio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:progressBackgroundTint="@color/divider"
+                android:progressTint="@color/accent_coral"
+                android:splitTrack="false"
+                android:thumbTint="@color/accent_coral"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnPause" />
+
+            <!-- Tiempo actual / duración total -->
+            <TextView
+                android:id="@+id/tvTiempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/tiempo_inicial"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/seekBarAudio" />
+
+            <!-- Tarjeta de estado del reproductor -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardEstado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:cardBackgroundColor="@color/primary_container"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTiempo"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconEstado"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@null"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_music"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:id="@+id/tvEstado"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="@string/audio_estado_inicial"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iconEstado"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPosicionGuardada"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="monospace"
+                        android:text="@string/audio_posicion_inicial"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iconEstado"
+                        app:layout_constraintTop_toBottomOf="@id/tvEstado"
+                        tools:text="Posición guardada: 00:00" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progressStream"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvPosicionGuardada"
+                        app:trackColor="@color/divider"
+                        app:trackThickness="4dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Nota explicativa sobre el ciclo de vida -->
+            <TextView
+                android:id="@+id/tvNotaAudio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/audio_nota"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardEstado" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

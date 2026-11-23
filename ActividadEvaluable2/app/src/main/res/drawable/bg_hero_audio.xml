@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta degradada de la sección de audio (tonos coral) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="135"
+        android:endColor="#FF9F68"
+        android:startColor="#FF6B6B"
+        android:type="linear" />
+    <corners android:radius="24dp" />
+</shape>

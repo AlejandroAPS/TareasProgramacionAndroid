@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cabecera degradada de la pantalla principal -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="135"
+        android:centerColor="#7C6CF0"
+        android:endColor="#A29BFE"
+        android:startColor="#5A4AD1"
+        android:type="linear" />
+    <corners
+        android:bottomLeftRadius="36dp"
+        android:bottomRightRadius="36dp" />
+</shape>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo general suave para todas las pantallas -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="#EEF0FB"
+        android:startColor="#FAFBFF"
+        android:type="linear" />
+</shape>

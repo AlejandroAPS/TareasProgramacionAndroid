@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Sección de IMAGEN.
+    Filtros sobre copias mutables, conversión JPEG/PNG y animaciones ObjectAnimator.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imagenRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app_gradient"
+    tools:context=".ImagenActivity">
+
+    <!-- Barra superior con navegación hacia atrás -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarImagen"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/surface"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/text_primary"
+        app:title="@string/imagen_title"
+        app:titleCentered="true"
+        app:titleTextColor="@color/text_primary" />
+
+    <View
+        android:id="@+id/dividerImagen"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarImagen" />
+
+    <ScrollView
+        android:id="@+id/scrollImagen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerImagen">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Tarjeta de presentación de la sección -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/heroImagen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_hero_imagen"
+                android:elevation="2dp"
+                android:padding="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iconHeroImagen"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_circle_translucent"
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/titleHeroImagen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/imagen_hero_title"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconHeroImagen"
+                    app:layout_constraintTop_toTopOf="@id/iconHeroImagen" />
+
+                <TextView
+                    android:id="@+id/descHeroImagen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="8dp"
+                    android:lineSpacingExtra="1dp"
+                    android:text="@string/imagen_hero_desc"
+                    android:textColor="#F2FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iconHeroImagen"
+                    app:layout_constraintTop_toBottomOf="@id/titleHeroImagen" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Imagen sobre la que se aplican los filtros -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardImagenMostrada"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                app:cardBackgroundColor="@color/text_primary"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/heroImagen"
+                app:strokeWidth="0dp">
+
+                <ImageView
+                    android:id="@+id/ivImagen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/imagen_descripcion"
+                    android:minHeight="180dp"
+                    android:scaleType="fitCenter" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Fila de estado + indicador de progreso -->
+            <ProgressBar
+                android:id="@+id/progressImagen"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="12dp"
+                android:indeterminateTint="@color/primary"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardImagenMostrada" />
+
+            <TextView
+                android:id="@+id/tvEstadoImagen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:lineSpacingExtra="2dp"
+                android:text="@string/imagen_estado_inicial"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/progressImagen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/progressImagen"
+                app:layout_constraintTop_toTopOf="@id/progressImagen" />
+
+            <!-- ==================== FILTROS ==================== -->
+            <TextView
+                android:id="@+id/tituloFiltros"
+                style="@style/Widget.App.SectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/seccion_filtros"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressImagen" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGrises"
+                style="@style/Widget.App.Button.Tonal"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/btn_grises"
+                app:layout_constraintEnd_toStartOf="@id/btnSepia"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tituloFiltros" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSepia"
+                style="@style/Widget.App.Button.Tonal"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btn_sepia"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnGrises"
+                app:layout_constraintTop_toBottomOf="@id/tituloFiltros" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRestaurar"
+                style="@style/Widget.App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btn_restaurar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnGrises" />
+
+            <!-- ==================== CONVERSIÓN ==================== -->
+            <TextView
+                android:id="@+id/tituloFormatos"
+                style="@style/Widget.App.SectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/seccion_formatos"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnRestaurar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnJpeg"
+                style="@style/Widget.App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/btn_jpeg"
+                app:layout_constraintEnd_toStartOf="@id/btnPng"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tituloFormatos" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPng"
+                style="@style/Widget.App.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btn_png"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnJpeg"
+                app:layout_constraintTop_toBottomOf="@id/tituloFormatos" />
+
+            <!-- ==================== ANIMACIONES ==================== -->
+            <TextView
+                android:id="@+id/tituloAnimaciones"
+                style="@style/Widget.App.SectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/seccion_animaciones"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnJpeg" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRotar"
+                style="@style/Widget.App.Button"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="@string/btn_rotar"
+                app:icon="@drawable/ic_rotate"
+                app:layout_constraintEnd_toStartOf="@id/btnEscalar"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tituloAnimaciones" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEscalar"
+                style="@style/Widget.App.Button"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btn_escala"
+                app:icon="@drawable/ic_scale"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnRotar"
+                app:layout_constraintTop_toBottomOf="@id/tituloAnimaciones" />
+
+            <!-- Nota explicativa -->
+            <TextView
+                android:id="@+id/tvNotaImagen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:lineSpacingExtra="3dp"
+                android:text="@string/imagen_nota"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnRotar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

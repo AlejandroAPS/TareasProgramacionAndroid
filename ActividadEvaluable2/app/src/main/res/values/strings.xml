@@ -1,0 +1,86 @@
+<resources>
+    <!-- ==================== GENERAL ==================== -->
+    <string name="app_name">Actividad Evaluable 2</string>
+    <string name="main_title">Multimedia Lab</string>
+    <string name="main_subtitle">Dos experiencias nativas para explorar audio e imagen con Kotlin.</string>
+    <string name="main_tag">PMDM · ANDROID</string>
+    <string name="main_footer">PMDM · Actividad Evaluable 2 · Kotlin + ConstraintLayout</string>
+
+    <!-- ==================== MENÚ PRINCIPAL ==================== -->
+    <string name="main_audio_tag">AUDIO</string>
+    <string name="main_audio_title">Reproductor de audio</string>
+    <string name="main_audio_desc">Pista local en res/raw y streaming online con MediaPlayer.</string>
+    <string name="main_image_tag">IMAGEN</string>
+    <string name="main_image_title">Estudio de imagen</string>
+    <string name="main_image_desc">Filtros, conversión JPEG/PNG y animaciones de propiedades.</string>
+
+    <!-- ==================== SECCIÓN AUDIO ==================== -->
+    <string name="audio_title">Audio</string>
+    <string name="audio_hero_title">Música sin límites</string>
+    <string name="audio_hero_desc">Reproduce la pista local de res/raw o un stream desde una URL.</string>
+    <string name="url_hint">URL del audio (MP3, OGG, WAV…)</string>
+    <string name="url_helper">URL de ejemplo lista para probar. También puedes pegar la tuya.</string>
+    <string name="url_ejemplo" formatted="false">https://download.samplelib.com/mp3/sample-15s.mp3</string>
+    <string name="btn_play_local">Play Local</string>
+    <string name="btn_play_online">Play Online</string>
+    <string name="btn_pause">Pause</string>
+    <string name="btn_stop">Stop</string>
+    <string name="tiempo_inicial">00:00 / 00:00</string>
+    <string name="tiempo_progreso" formatted="false">%1$s / %2$s</string>
+    <string name="audio_estado_inicial">Listo para reproducir. Elige la pista local o pulsa Play Online.</string>
+    <string name="audio_posicion_inicial">Posición guardada: 00:00</string>
+    <string name="audio_posicion_guardada">Posición guardada: %1$s</string>
+    <string name="audio_nota">Ciclo de vida: la reproducción se pausa y guarda su posición en onPause(), y el MediaPlayer se libera con release() en onDestroy() para evitar fugas de memoria.</string>
+
+    <!-- Estados del reproductor -->
+    <string name="audio_estado_local">Reproduciendo pista local (res/raw/pista.wav)…</string>
+    <string name="audio_estado_conectando">Conectando con el stream…</string>
+    <string name="audio_estado_buffering">Cargando stream… %1$d%%</string>
+    <string name="audio_estado_online">Reproduciendo audio online…</string>
+    <string name="audio_estado_pausa">En pausa · %1$s</string>
+    <string name="audio_estado_pausa_auto">En pausa al salir de la pantalla · %1$s</string>
+    <string name="audio_estado_preparado_pausa">Stream preparado en pausa. Pulsa Pause para reanudar.</string>
+    <string name="audio_estado_reanudado">Reproducción reanudada</string>
+    <string name="audio_estado_detenido">Reproducción detenida. El reproductor se ha liberado.</string>
+    <string name="audio_estado_final">Reproducción finalizada.</string>
+    <string name="audio_estado_error">Error de reproducción. El reproductor se ha reiniciado.</string>
+
+    <!-- Errores y avisos de audio -->
+    <string name="audio_sin_reproduccion">No hay ninguna reproducción activa.</string>
+    <string name="audio_error_url">Introduce una URL válida que empiece por http:// o https://</string>
+    <string name="audio_error_pista_local">No se pudo cargar la pista local. Comprueba res/raw/pista.wav.</string>
+    <string name="audio_error_conexion">No se pudo conectar con el audio. Revisa la URL, el formato y tu conexión a Internet.</string>
+    <string name="audio_error_estado">El reproductor no está en un estado válido. Pulsa Stop e inténtalo de nuevo.</string>
+    <string name="audio_error_reproduccion">No se pudo reproducir el audio. Comprueba la URL o el formato.</string>
+    <string name="audio_error_generico">Ha ocurrido un error inesperado con el reproductor.</string>
+
+    <!-- ==================== SECCIÓN IMAGEN ==================== -->
+    <string name="imagen_title">Imagen</string>
+    <string name="imagen_hero_title">Tu foto, tu estilo</string>
+    <string name="imagen_hero_desc">Filtros sobre copias mutables, conversión de formato y animaciones ObjectAnimator.</string>
+    <string name="imagen_estado_inicial">Imagen de ejemplo generada. Prueba un filtro o una animación.</string>
+    <string name="seccion_filtros">Filtros de color</string>
+    <string name="btn_grises">Escala de grises</string>
+    <string name="btn_sepia">Sepia</string>
+    <string name="btn_restaurar">Restaurar original</string>
+    <string name="seccion_formatos">Conversión de formato</string>
+    <string name="btn_jpeg">Convertir JPEG</string>
+    <string name="btn_png">Convertir PNG</string>
+    <string name="seccion_animaciones">Animaciones de propiedades</string>
+    <string name="btn_rotar">Rotar 360°</string>
+    <string name="btn_escala">Escalar</string>
+    <string name="imagen_descripcion">Imagen de ejemplo con degradado, sol y montañas</string>
+    <string name="imagen_nota">Los filtros recorren los píxeles de una copia creada con Bitmap.copy(config, true). La imagen original nunca se modifica, por eso siempre puedes restaurarla.</string>
+    <string name="imagen_cargando_filtro">Aplicando filtro sobre una copia mutable…</string>
+    <string name="imagen_estado_filtro">Filtro %1$s aplicado sobre una copia mutable.</string>
+    <string name="filtro_grises">escala de grises</string>
+    <string name="filtro_sepia">sepia</string>
+    <string name="imagen_estado_original">Imagen original restaurada.</string>
+    <string name="imagen_estado_rotacion">Animación de rotación de 360° en curso…</string>
+    <string name="imagen_estado_escala">Animación de escala en curso…</string>
+    <string name="imagen_estado_convirtiendo">Generando archivo %1$s en la caché…</string>
+    <string name="imagen_estado_convertida">Convertida a %1$s · %2$d KB en la caché.</string>
+    <string name="imagen_guardada">Imagen %1$s guardada en caché (%2$d KB)\n%3$s</string>
+    <string name="imagen_error_filtro">No se pudo aplicar el filtro. Puede que no haya memoria suficiente.</string>
+    <string name="imagen_error_conversion">No se pudo guardar la imagen. Revisa el espacio disponible.</string>
+</resources>
