@@ -186,9 +186,6 @@ class AudioActivity : AppCompatActivity() {
         })
     }
 
-    // ============================================================
-    //  REPRODUCCIÓN LOCAL (res/raw/pista.wav)
-    // ============================================================
 
     /**
      * Reproduce la pista incluida en res/raw.
@@ -202,7 +199,7 @@ class AudioActivity : AppCompatActivity() {
 
         try {
             // create() devuelve un MediaPlayer ya preparado o null si no puede cargarlo.
-            val pista = MediaPlayer.create(this, R.raw.pista)
+            val pista = MediaPlayer.create(this, R.raw.pista_mp3)
             if (pista == null) {
                 mostrarToast(getString(R.string.audio_error_pista_local))
                 return
@@ -229,10 +226,6 @@ class AudioActivity : AppCompatActivity() {
             manejarErrorLocal(e)
         }
     }
-
-    // ============================================================
-    //  STREAMING ONLINE (setDataSource + prepareAsync)
-    // ============================================================
 
     /**
      * Reproduce un audio remoto a partir de la URL escrita por el usuario.
@@ -362,10 +355,6 @@ class AudioActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================================
-    //  CONTROLES: PAUSE / STOP
-    // ============================================================
-
     /**
      * Pausa la reproducción. Si ya estaba en pausa, el mismo botón la reanuda
      * desde la posición guardada (comportamiento cómodo para el usuario).
@@ -453,10 +442,6 @@ class AudioActivity : AppCompatActivity() {
             }
         }
     }
-
-    // ============================================================
-    //  CICLO DE VIDA
-    // ============================================================
 
     /**
      * Si la app pasa a segundo plano, se pausa la reproducción y se guarda la

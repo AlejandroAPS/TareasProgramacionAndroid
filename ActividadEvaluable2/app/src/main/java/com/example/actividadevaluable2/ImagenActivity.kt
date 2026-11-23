@@ -3,12 +3,7 @@ package com.example.actividadevaluable2
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.LinearGradient
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.Shader
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,10 +11,8 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.createBitmap
 import androidx.core.view.isVisible
 import com.example.actividadevaluable2.util.aplicarInsetsSistema
 import com.example.actividadevaluable2.util.configurarEdgeToEdge
@@ -28,13 +21,12 @@ import com.google.android.material.button.MaterialButton
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import kotlin.random.Random
 
 /**
  * Sección de IMAGEN de la Actividad Evaluable 2.
  *
  * Funcionalidades principales:
- *  - Imagen de ejemplo generada con Canvas para no depender de recursos externos.
+ *  - Imagen de ejemplo cargada desde el drawable mi_pueblo.png.
  *  - Filtros de escala de grises y sepia recorriendo los píxeles de una copia mutable.
  *  - Conversión del Bitmap actual a JPEG y a PNG con Bitmap.compress().
  *  - Animaciones de propiedades con ObjectAnimator: rotación 360° y escala.
@@ -51,7 +43,6 @@ class ImagenActivity : AppCompatActivity() {
     private lateinit var toolbar: MaterialToolbar
     private lateinit var ivImagen: ImageView
     private lateinit var progressImagen: ProgressBar
-    private lateinit var tvEstadoImagen: TextView
     private lateinit var btnGrises: MaterialButton
     private lateinit var btnSepia: MaterialButton
     private lateinit var btnRestaurar: MaterialButton
@@ -87,7 +78,6 @@ class ImagenActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbarImagen)
         ivImagen = findViewById(R.id.ivImagen)
         progressImagen = findViewById(R.id.progressImagen)
-        tvEstadoImagen = findViewById(R.id.tvEstadoImagen)
         btnGrises = findViewById(R.id.btnGrises)
         btnSepia = findViewById(R.id.btnSepia)
         btnRestaurar = findViewById(R.id.btnRestaurar)
@@ -127,140 +117,58 @@ class ImagenActivity : AppCompatActivity() {
     }
 
     /**
-     * Crea una imagen de ejemplo con Canvas y la muestra.
+     * Carga la imagen mi_pueblo.png desde los recursos y la muestra.
      *
-     * Se genera en código para que el proyecto sea autocontenido. La imagen tiene
-     * colores variados, ideales para apreciar los filtros de grises y sepia.
+     * La imagen se decodifica con BitmapFactory reduciendo su tamaño si fuera
+     * necesario, para no ocupar demasiada memoria al aplicar los filtros.
      */
     private fun cargarImagenInicial() {
         try {
-            val original = crearImagenEjemplo(ancho = 900, alto = 675)
+            val original = decodificarImagen(R.drawable.mi_pueblo)
             imagenOriginal = original
             imagenMostrada = original
             ivImagen.setImageBitmap(original)
         } catch (e: OutOfMemoryError) {
-            Log.e(TAG, "No hay memoria para crear la imagen de ejemplo", e)
-            tvEstadoImagen.text = getString(R.string.imagen_error_filtro)
+            Log.e(TAG, "No hay memoria para cargar la imagen", e)
+            mostrarToast(getString(R.string.imagen_error_carga))
             bloquearControles(true)
         } catch (e: Exception) {
-            Log.e(TAG, "Error al crear la imagen de ejemplo", e)
-            tvEstadoImagen.text = getString(R.string.imagen_error_filtro)
+            Log.e(TAG, "Error al cargar la imagen", e)
+            mostrarToast(getString(R.string.imagen_error_carga))
             bloquearControles(true)
         }
     }
 
     /**
-     * Dibuja un paisaje de atardecer con degradados, sol, montañas y agua.
-     * Se usa una semilla fija para que las estrellas siempre queden igual.
+     * Decodifica un drawable con BitmapFactory.
+     *
+     * Primero se leen solo las dimensiones (inJustDecodeBounds) y después se
+     * calcula inSampleSize para que el lado mayor no supere MAX_LADO_IMAGEN.
      */
-    private fun crearImagenEjemplo(ancho: Int, alto: Int): Bitmap {
-        val bitmap = createBitmap(ancho, alto, Bitmap.Config.ARGB_8888)
-        val lienzo = Canvas(bitmap)
-        val w = ancho.toFloat()
-        val h = alto.toFloat()
+    private fun decodificarImagen(recurso: Int): Bitmap {
+        val medidas = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+        BitmapFactory.decodeResource(resources, recurso, medidas)
 
-        // 1) Cielo con degradado vertical.
-        val pincelCielo = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            shader = LinearGradient(
-                0f, 0f, 0f, h,
-                intArrayOf(
-                    Color.rgb(32, 20, 64),
-                    Color.rgb(120, 45, 130),
-                    Color.rgb(255, 126, 95)
-                ),
-                floatArrayOf(0f, 0.55f, 1f),
-                Shader.TileMode.CLAMP
-            )
-        }
-        lienzo.drawRect(0f, 0f, w, h, pincelCielo)
-
-        // 2) Estrellas en la parte alta del cielo.
-        val aleatorio = Random(7)
-        val pincelEstrella = Paint().apply { color = Color.argb(210, 255, 255, 255) }
-        repeat(48) {
-            val x = aleatorio.nextFloat() * w
-            val y = aleatorio.nextFloat() * h * 0.38f
-            val radio = aleatorio.nextFloat() * 2.2f + 0.7f
-            lienzo.drawCircle(x, y, radio, pincelEstrella)
+        val opciones = BitmapFactory.Options().apply {
+            inSampleSize = calcularMuestra(medidas.outWidth, medidas.outHeight)
         }
 
-        // 3) Sol con un halo suave.
-        val solX = w * 0.70f
-        val solY = h * 0.42f
-        val halo = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.argb(50, 255, 224, 150)
-        }
-        lienzo.drawCircle(solX, solY, h * 0.18f, halo)
-
-        val sol = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(255, 226, 154) }
-        lienzo.drawCircle(solX, solY, h * 0.10f, sol)
-
-        // 4) Montañas lejanas.
-        val montanaLejana = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(94, 44, 108) }
-        val perfilLejano = Path().apply {
-            moveTo(0f, h * 0.72f)
-            lineTo(w * 0.18f, h * 0.50f)
-            lineTo(w * 0.36f, h * 0.68f)
-            lineTo(w * 0.55f, h * 0.44f)
-            lineTo(w * 0.74f, h * 0.67f)
-            lineTo(w * 0.88f, h * 0.52f)
-            lineTo(w, h * 0.70f)
-            lineTo(w, h * 0.80f)
-            lineTo(0f, h * 0.80f)
-            close()
-        }
-        lienzo.drawPath(perfilLejano, montanaLejana)
-
-        // 5) Montañas cercanas, más oscuras, para dar profundidad.
-        val montanaCercana = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.rgb(48, 22, 66) }
-        val perfilCercano = Path().apply {
-            moveTo(0f, h * 0.82f)
-            lineTo(w * 0.12f, h * 0.64f)
-            lineTo(w * 0.30f, h * 0.80f)
-            lineTo(w * 0.45f, h * 0.60f)
-            lineTo(w * 0.62f, h * 0.82f)
-            lineTo(w * 0.80f, h * 0.66f)
-            lineTo(w, h * 0.84f)
-            lineTo(w, h)
-            lineTo(0f, h)
-            close()
-        }
-        lienzo.drawPath(perfilCercano, montanaCercana)
-
-        // 6) Agua con degradado y reflejo del sol.
-        val pincelAgua = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            shader = LinearGradient(
-                0f, h * 0.72f, 0f, h,
-                Color.rgb(58, 28, 82),
-                Color.rgb(10, 8, 24),
-                Shader.TileMode.CLAMP
-            )
-        }
-        lienzo.drawRect(0f, h * 0.72f, w, h, pincelAgua)
-
-        val pincelReflejo = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.argb(55, 255, 210, 155)
-        }
-        repeat(7) { indice ->
-            val y = h * 0.76f + indice * h * 0.033f
-            val anchoLinea = w * (0.14f - indice * 0.012f)
-            lienzo.drawRoundRect(
-                solX - anchoLinea / 2f,
-                y,
-                solX + anchoLinea / 2f,
-                y + h * 0.008f,
-                h * 0.004f,
-                h * 0.004f,
-                pincelReflejo
-            )
-        }
-
-        return bitmap
+        return BitmapFactory.decodeResource(resources, recurso, opciones)
+            ?: throw IllegalStateException("BitmapFactory no pudo decodificar el drawable")
     }
 
-    // ============================================================
-    //  FILTROS DE IMAGEN
-    // ============================================================
+    /** Calcula la potencia de 2 necesaria para no superar el tamaño máximo. */
+    private fun calcularMuestra(ancho: Int, alto: Int): Int {
+        var muestra = 1
+        val ladoMayor = maxOf(ancho, alto)
+
+        while (ladoMayor / muestra > MAX_LADO_IMAGEN) {
+            muestra *= 2
+        }
+
+        return muestra
+    }
+
 
     /**
      * Aplica el filtro solicitado en un hilo secundario para no congelar la interfaz.
@@ -275,7 +183,6 @@ class ImagenActivity : AppCompatActivity() {
 
         bloquearControles(true)
         progressImagen.isVisible = true
-        tvEstadoImagen.text = getString(R.string.imagen_cargando_filtro)
 
         Thread {
             var resultado: Bitmap? = null
@@ -300,13 +207,7 @@ class ImagenActivity : AppCompatActivity() {
                 val filtrada = resultado
                 if (filtrada != null) {
                     mostrarBitmap(filtrada)
-                    val nombre = getString(
-                        if (tipo == TipoFiltro.GRISES) R.string.filtro_grises
-                        else R.string.filtro_sepia
-                    )
-                    tvEstadoImagen.text = getString(R.string.imagen_estado_filtro, nombre)
                 } else {
-                    tvEstadoImagen.text = getString(R.string.imagen_error_filtro)
                     mostrarToast(getString(R.string.imagen_error_filtro))
                 }
             }
@@ -320,6 +221,7 @@ class ImagenActivity : AppCompatActivity() {
      * destruir la imagen original. Después se recorren todos los píxeles con
      * getPixels(), se transforman los canales R, G y B y se devuelven con setPixels().
      */
+
     private fun procesarFiltro(base: Bitmap, tipo: TipoFiltro): Bitmap {
         val ancho = base.width
         val alto = base.height
@@ -385,7 +287,6 @@ class ImagenActivity : AppCompatActivity() {
             return
         }
         mostrarBitmap(original)
-        tvEstadoImagen.text = getString(R.string.imagen_estado_original)
     }
 
     /**
@@ -407,9 +308,6 @@ class ImagenActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================================
-    //  CONVERSIÓN DE FORMATOS
-    // ============================================================
 
     /**
      * Convierte el Bitmap mostrado a JPEG o PNG usando Bitmap.compress().
@@ -428,8 +326,6 @@ class ImagenActivity : AppCompatActivity() {
             return
         }
 
-        tvEstadoImagen.text = getString(R.string.imagen_estado_convirtiendo, formato.name)
-
         val archivo = File(cacheDir, "imagen_${System.currentTimeMillis()}.$extension")
 
         try {
@@ -443,11 +339,6 @@ class ImagenActivity : AppCompatActivity() {
             }
 
             val kilobytes = (archivo.length() / 1024).coerceAtLeast(1L).toInt()
-            tvEstadoImagen.text = getString(
-                R.string.imagen_estado_convertida,
-                formato.name,
-                kilobytes
-            )
 
             mostrarToast(
                 getString(
@@ -459,18 +350,14 @@ class ImagenActivity : AppCompatActivity() {
             )
         } catch (e: IOException) {
             Log.e(TAG, "No se pudo convertir la imagen a ${formato.name}", e)
-            tvEstadoImagen.text = getString(R.string.imagen_error_conversion)
             mostrarToast(getString(R.string.imagen_error_conversion))
         } catch (e: SecurityException) {
             Log.e(TAG, "Sin permiso para escribir en caché", e)
-            tvEstadoImagen.text = getString(R.string.imagen_error_conversion)
             mostrarToast(getString(R.string.imagen_error_conversion))
         }
     }
 
-    // ============================================================
-    //  ANIMACIONES CON OBJECTANIMATOR
-    // ============================================================
+
 
     /**
      * Animación 1: rotación completa de 360° sobre el ImageView.
@@ -485,8 +372,6 @@ class ImagenActivity : AppCompatActivity() {
             interpolator = DecelerateInterpolator()
             start()
         }
-
-        tvEstadoImagen.text = getString(R.string.imagen_estado_rotacion)
     }
 
     /**
@@ -507,13 +392,7 @@ class ImagenActivity : AppCompatActivity() {
             interpolator = OvershootInterpolator()
             start()
         }
-
-        tvEstadoImagen.text = getString(R.string.imagen_estado_escala)
     }
-
-    // ============================================================
-    //  UTILIDADES
-    // ============================================================
 
     /** Activa o desactiva los botones mientras se procesa la imagen. */
     private fun bloquearControles(bloqueado: Boolean) {
@@ -546,5 +425,8 @@ class ImagenActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "ImagenActivity"
+
+        /** Lado máximo en píxeles al decodificar el drawable, para ahorrar memoria. */
+        private const val MAX_LADO_IMAGEN = 1600
     }
 }

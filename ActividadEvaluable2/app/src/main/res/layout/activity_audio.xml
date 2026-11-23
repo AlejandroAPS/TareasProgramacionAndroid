@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Sección de AUDIO.
-    Reproducción local (res/raw/pista.wav) y streaming online con MediaPlayer.
-    Controles: Play Local, Play Online, Pause y Stop.
--->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -60,81 +56,22 @@
             android:paddingEnd="20dp"
             android:paddingBottom="24dp">
 
-            <!-- Tarjeta de presentación de la sección -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/heroAudio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_hero_audio"
-                android:elevation="2dp"
-                android:padding="18dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iconHeroAudio"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:background="@drawable/bg_circle_translucent"
-                    android:contentDescription="@null"
-                    android:importantForAccessibility="no"
-                    android:padding="11dp"
-                    android:src="@drawable/ic_music"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/titleHeroAudio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/audio_hero_title"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iconHeroAudio"
-                    app:layout_constraintTop_toTopOf="@id/iconHeroAudio" />
-
-                <TextView
-                    android:id="@+id/descHeroAudio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="8dp"
-                    android:lineSpacingExtra="1dp"
-                    android:text="@string/audio_hero_desc"
-                    android:textColor="#F2FFFFFF"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iconHeroAudio"
-                    app:layout_constraintTop_toBottomOf="@id/titleHeroAudio" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <!-- Campo para la URL del stream -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUrl"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:hint="@string/url_hint"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusTopStart="16dp"
                 app:endIconMode="clear_text"
-                app:helperText="@string/url_helper"
                 app:helperTextEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heroAudio"
+                app:layout_constraintTop_toTopOf="parent"
                 app:startIconDrawable="@drawable/ic_cloud"
                 app:startIconTint="@color/primary">
 
@@ -311,19 +248,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Nota explicativa sobre el ciclo de vida -->
-            <TextView
-                android:id="@+id/tvNotaAudio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:lineSpacingExtra="3dp"
-                android:text="@string/audio_nota"
-                android:textColor="@color/text_secondary"
-                android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardEstado" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

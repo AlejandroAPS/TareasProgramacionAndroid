@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Sección de IMAGEN.
-    Filtros sobre copias mutables, conversión JPEG/PNG y animaciones ObjectAnimator.
--->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -56,75 +53,17 @@
             android:paddingEnd="20dp"
             android:paddingBottom="24dp">
 
-            <!-- Tarjeta de presentación de la sección -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/heroImagen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_hero_imagen"
-                android:elevation="2dp"
-                android:padding="18dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iconHeroImagen"
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
-                    android:background="@drawable/bg_circle_translucent"
-                    android:contentDescription="@null"
-                    android:importantForAccessibility="no"
-                    android:padding="11dp"
-                    android:src="@drawable/ic_image"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:id="@+id/titleHeroImagen"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/imagen_hero_title"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iconHeroImagen"
-                    app:layout_constraintTop_toTopOf="@id/iconHeroImagen" />
-
-                <TextView
-                    android:id="@+id/descHeroImagen"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="8dp"
-                    android:lineSpacingExtra="1dp"
-                    android:text="@string/imagen_hero_desc"
-                    android:textColor="#F2FFFFFF"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iconHeroImagen"
-                    app:layout_constraintTop_toBottomOf="@id/titleHeroImagen" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <!-- Imagen sobre la que se aplican los filtros -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardImagenMostrada"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
                 app:cardBackgroundColor="@color/text_primary"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/heroImagen"
+                app:layout_constraintTop_toTopOf="parent"
                 app:strokeWidth="0dp">
 
                 <ImageView
@@ -137,7 +76,7 @@
                     android:scaleType="fitCenter" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Fila de estado + indicador de progreso -->
+            <!-- Indicador de progreso mientras se aplica un filtro -->
             <ProgressBar
                 android:id="@+id/progressImagen"
                 android:layout_width="20dp"
@@ -147,20 +86,6 @@
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardImagenMostrada" />
-
-            <TextView
-                android:id="@+id/tvEstadoImagen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:lineSpacingExtra="2dp"
-                android:text="@string/imagen_estado_inicial"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/progressImagen"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/progressImagen"
-                app:layout_constraintTop_toTopOf="@id/progressImagen" />
 
             <!-- ==================== FILTROS ==================== -->
             <TextView
@@ -282,20 +207,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btnRotar"
                 app:layout_constraintTop_toBottomOf="@id/tituloAnimaciones" />
-
-            <!-- Nota explicativa -->
-            <TextView
-                android:id="@+id/tvNotaImagen"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:lineSpacingExtra="3dp"
-                android:text="@string/imagen_nota"
-                android:textColor="@color/text_secondary"
-                android:textSize="11sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnRotar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
