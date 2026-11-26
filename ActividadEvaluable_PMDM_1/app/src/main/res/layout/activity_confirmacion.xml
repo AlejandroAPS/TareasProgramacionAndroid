@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/negro_fondo"
+    tools:context=".ConfirmacionActivity">
+
+    <include
+        android:id="@+id/barraSuperior"
+        layout="@layout/barra_superior"
+        android:layout_width="0dp"
+        android:layout_height="85dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/barraSuperior"
+        app:layout_constraintBottom_toTopOf="@id/btnOtroPedido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/etiqueta_id_pedido"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvIdPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                tools:text="ESK-261126-4821" />
+
+            <TextView
+                android:id="@+id/tvFechaPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                tools:text="Realizado el 26/11/2026 14:35:20" />
+
+            <!-- Tarjeta del artículo (reutilizada) -->
+            <include layout="@layout/item_tarjeta" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/gris_tarjeta"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/titulo_resumen"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvResCantidad"
+                        style="@style/LineaResumen" />
+
+                    <TextView
+                        android:id="@+id/tvResEntrega"
+                        style="@style/LineaResumen" />
+
+                    <TextView
+                        android:id="@+id/tvResPago"
+                        style="@style/LineaResumen" />
+
+                    <TextView
+                        android:id="@+id/tvResNotas"
+                        style="@style/LineaResumen" />
+
+                    <TextView
+                        android:id="@+id/tvResSubtotal"
+                        style="@style/LineaResumen"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tvResEnvio"
+                        style="@style/LineaResumen" />
+
+                    <TextView
+                        android:id="@+id/tvResTotal"
+                        style="@style/LineaResumen"
+                        android:layout_marginTop="12dp"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvResTiempo"
+                        style="@style/LineaResumen"
+                        android:layout_marginTop="12dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnOtroPedido"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/gris_boton"
+        android:text="@string/otro_pedido"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

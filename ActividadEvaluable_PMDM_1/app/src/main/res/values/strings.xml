@@ -28,4 +28,17 @@
     <string name="hint_cvc">CVC</string>
     <string name="acepto_condiciones">Acepto las condiciones del pedido</string>
     <string name="confirmar_pedido">Confirmar pedido</string>
+    <string name="titulo_confirmacion">PEDIDO REALIZADO</string>
+    <string name="etiqueta_id_pedido">Número de pedido</string>
+    <string name="titulo_resumen">Resumen del pedido</string>
+    <string name="otro_pedido">Hacer otro pedido</string>
+    <string name="res_cantidad">Cantidad: %1$d</string>
+    <string name="res_entrega">Entrega:\n%1$s</string>
+    <string name="res_pago">Pago: %1$s</string>
+    <string name="res_notas">Notas: %1$s</string>
+    <string name="res_subtotal">Subtotal: %1$s</string>
+    <string name="res_envio">Envío: %1$s</string>
+    <string name="res_total">TOTAL: %1$s</string>
+    <string name="res_tiempo">Tiempo estimado de entrega: %1$d min</string>
+    <string name="res_fecha">Realizado el %1$s</string>
 </resources>

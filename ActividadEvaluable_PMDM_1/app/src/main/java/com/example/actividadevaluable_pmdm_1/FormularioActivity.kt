@@ -14,12 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButtonToggleGroup
 import java.util.Calendar
 import java.util.Locale
+import android.content.Intent
+import java.text.SimpleDateFormat
+import java.util.Date
+import kotlin.random.Random
 
 class FormularioActivity : AppCompatActivity() {
 
     private lateinit var articulo: Articulo
 
     private lateinit var grupoEntrega: MaterialButtonToggleGroup
+
     private lateinit var grupoPago: MaterialButtonToggleGroup
     private lateinit var seccionOtraDireccion: View
     private lateinit var seccionTarjeta: View
@@ -34,6 +39,7 @@ class FormularioActivity : AppCompatActivity() {
     private lateinit var etCaducidad: EditText
     private lateinit var etCvc: EditText
     private lateinit var cbCondiciones: CheckBox
+    private lateinit var etNotas: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +59,7 @@ class FormularioActivity : AppCompatActivity() {
         configurarFormatoCaducidad()
 
         findViewById<Button>(R.id.btnConfirmar).setOnClickListener {
-            if (validar()) {
-                // TODO: abrir la pantalla de confirmación con el artículo,
-                // la cantidad, la entrega, el pago y las notas
-                Toast.makeText(this, "Datos correctos", Toast.LENGTH_SHORT).show()
-            }
+            if (validar()) abrirConfirmacion()
         }
     }
 
@@ -76,6 +78,7 @@ class FormularioActivity : AppCompatActivity() {
         etCaducidad = findViewById(R.id.etCaducidad)
         etCvc = findViewById(R.id.etCvc)
         cbCondiciones = findViewById(R.id.cbCondiciones)
+        etNotas = findViewById(R.id.etNotas)
     }
 
     private fun pintarTarjeta() {
@@ -186,5 +189,43 @@ class FormularioActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+
+    private fun abrirConfirmacion() {
+        val prefs = UsuarioPrefs.get(this)
+        fun dato(clave: String) = prefs.getString(clave, "") ?: ""
+
+        // Fecha, hora e ID generados justo al tramitar
+        val ahora = Date()
+        val fecha = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale("es", "ES")).format(ahora)
+        val id = "ESK-" + SimpleDateFormat("yyMMdd", Locale.US).format(ahora) +
+                "-" + Random.nextInt(1000, 10000)
+
+        val entrega = if (esOtraDireccion()) {
+            "${etNombreDest.text.toString().trim()}\n" +
+                    "${etDireccionDest.text.toString().trim()}, ${etCpDest.text.toString().trim()}"
+        } else {
+            "${dato(UsuarioPrefs.KEY_NOMBRE)} ${dato(UsuarioPrefs.KEY_APELLIDOS)}\n" +
+                    "${dato(UsuarioPrefs.KEY_DIRECCION)}, ${dato(UsuarioPrefs.KEY_CODIGO_POSTAL)}"
+        }
+
+        val pago = if (pagaConTarjeta())
+            "Tarjeta terminada en ${etNumTarjeta.text.toString().takeLast(4)}"
+        else "Efectivo"
+
+        val notas = etNotas.text.toString().trim().ifEmpty { "Sin notas" }
+
+        startActivity(
+            Intent(this, ConfirmacionActivity::class.java)
+                .putExtra(ConfirmacionActivity.EXTRA_ARTICULO, articulo)
+                .putExtra(ConfirmacionActivity.EXTRA_CANTIDAD, etCantidad.text.toString().trim().toInt())
+                .putExtra(ConfirmacionActivity.EXTRA_ENTREGA, entrega)
+                .putExtra(ConfirmacionActivity.EXTRA_PAGO, pago)
+                .putExtra(ConfirmacionActivity.EXTRA_NOTAS, notas)
+                .putExtra(ConfirmacionActivity.EXTRA_ID, id)
+                .putExtra(ConfirmacionActivity.EXTRA_FECHA, fecha)
+        )
+        finish() // el formulario ya enviado no queda en la pila
     }
 }
