@@ -32,8 +32,7 @@ class RegistroActivity : AppCompatActivity() {
                 guardarUsuario()
                 // Vaciamos la pila: ni login ni registro quedan detrás
                 startActivity(
-                    Intent(this, TapasActivity::class.java)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    Intent(this, TapasActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 )
             }
         }
